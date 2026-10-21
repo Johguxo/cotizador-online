@@ -1,0 +1,22 @@
+# Entornos virtuales
+.venv/
+venv/
+
+# Variables de entorno (contienen contraseñas)
+.env
+
+# Archivos generados por Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+
+# PDFs generados
+storage/
+*.pdf
+
+# Editores y sistema operativo
+.vscode/
+.idea/
+.DS_Store
