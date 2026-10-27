@@ -44,3 +44,5 @@ Usa exactamente estos nombres (detalle en [docs/arquitectura.md](docs/arquitectu
 - **Nunca hagas push a `main`.**
 
 Más detalle en [docs/metodologia.md](docs/metodologia.md).
+
+no se conectan mis airpods 
