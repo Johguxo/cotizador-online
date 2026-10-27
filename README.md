@@ -2,6 +2,8 @@
 
 Web para generar cotizaciones en PDF a partir de un formulario. Guarda los clientes y las cotizaciones en una base de datos.
 
+hvcgcgfcgfc
+
 ## El problema
 
 Hoy los pedidos de cotización llegan por correo. Para cada uno hay que llenar una plantilla a mano, exportarla a PDF y anotarla en un Excel. Eso toma mucho tiempo.
