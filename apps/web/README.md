@@ -8,19 +8,23 @@ Desde la raíz del repositorio:
 
 ```bash
 pnpm install
+cp apps/web/.env.example apps/web/.env.local
 pnpm dev
 ```
 
 Abre http://localhost:3000. La página se actualiza sola al guardar un archivo.
 
-Usa siempre **pnpm** (no npm, yarn ni bun): el monorepo depende de él.
+- `.env.local` le dice a la web dónde está la API (`NEXT_PUBLIC_API_URL`, por defecto `http://127.0.0.1:8010`). No se sube a git.
+- `/dashboard` necesita la API levantada (ver [apps/api/README.md](../api/README.md)).
+- Usa siempre **pnpm** (no npm, yarn ni bun): el monorepo depende de él.
 
 ## Pantallas actuales
 
 | Ruta | Qué muestra |
 |---|---|
 | `/` | Redirige a `/login` |
-| `/login` | Formulario de login (prototipo, todavía sin conexión a Supabase Auth) |
+| `/login` | Formulario de login. **Prototipo:** todavía no usa Supabase Auth; cualquier envío lleva a `/dashboard` |
+| `/dashboard` | Nombre, rol y empresa del usuario, leídos de `GET /me` en la API |
 
 ## Componentes de UI
 

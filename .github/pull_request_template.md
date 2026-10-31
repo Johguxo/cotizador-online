@@ -28,5 +28,5 @@
 - [ ] El CI está en verde (lint y pruebas)
 - [ ] El PR tiene descripción y explicación del código
 - [ ] Fue revisado y aprobado
-- [ ] Está en `main` y desplegado (API en Railway, web en Vercel)
+- [ ] Está mergeado en `develop`
 - [ ] Puedo explicarlo sin ayuda

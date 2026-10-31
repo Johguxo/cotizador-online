@@ -120,25 +120,31 @@ pnpm install
 
 `pnpm install` instala las dependencias de JavaScript de todo el monorepo. Las de Python se instalan solas la primera vez que corres `uv run`.
 
+Copia las variables de entorno de la web (le dicen dónde está la API):
+
+```bash
+cp apps/web/.env.example apps/web/.env.local
+```
+
 ### Levantar el proyecto
 
 Hoy se necesitan **dos terminales**, porque `pnpm dev` todavía no levanta la API.
 
-**Terminal 1 — web:**
+**Terminal 1 — API** (en el puerto 8010, el que espera la web):
+
+```bash
+cd apps/api
+uv run uvicorn main:app --reload --port 8010
+```
+
+Abre http://localhost:8010/health. Debe responder `{"status": "ok"}`. La documentación interactiva de la API está en http://localhost:8010/docs.
+
+**Terminal 2 — web:**
 
 ```bash
 pnpm dev
 ```
 
-Abre http://localhost:3000.
-
-**Terminal 2 — API:**
-
-```bash
-cd apps/api
-uv run uvicorn main:app --reload
-```
-
-Abre http://localhost:8000/health. Debe responder `{"status": "ok"}`. La documentación interactiva de la API está en http://localhost:8000/docs.
+Abre http://localhost:3000. Te lleva a `/login`; por ahora cualquier correo y contraseña te dejan entrar a `/dashboard`.
 
 Las variables de entorno y el despliegue están en [docs/despliegue.md](docs/despliegue.md).
