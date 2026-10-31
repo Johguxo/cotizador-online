@@ -26,7 +26,7 @@ Monorepo con pnpm + Turborepo y uv.
 - **Supabase:** PostgreSQL con RLS, Auth, Storage. Migraciones en SQL con Supabase CLI (no Alembic).
 - **Avisos:** WhatsApp Cloud API (Meta).
 - **CI:** GitHub Actions (ruff, eslint, pytest, vitest).
-- **Despliegue:** Railway (web y API).
+- **Despliegue (demo):** API en Railway, web en Vercel, datos en Supabase. Ver [docs/despliegue.md](docs/despliegue.md).
 
 No agregues librerías nuevas sin explicar por qué hacen falta.
 

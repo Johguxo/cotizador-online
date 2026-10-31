@@ -77,7 +77,7 @@ Las skills se crean en COT-01 (las tres primeras) y en los tickets siguientes.
 6. Ejecuta `/implement-task` **una tarea a la vez**: lee el código, pruébalo y haz commit antes de pasar a la siguiente.
 7. Abre el **PR del código** enlazando la spec y llena la plantilla. Antes de pedir revisión, ejecuta `/review-pr`.
 8. Tu compañero revisa primero; después el líder aprueba y hace merge.
-9. El merge a `main` despliega automáticamente en Railway y Linear marca el ticket como **Done**.
+9. El merge a `main` despliega automáticamente (API en Railway, web en Vercel) y Linear marca el ticket como **Done**.
 
 ## Mensajes de commit
 
@@ -100,7 +100,7 @@ Un ticket está terminado solo cuando:
 - [ ] El CI está en verde (lint y pruebas)
 - [ ] El PR tiene descripción y explicación del código
 - [ ] Fue revisado y aprobado
-- [ ] Está en `main` y desplegado en Railway
+- [ ] Está en `main` y desplegado (API en Railway, web en Vercel)
 - [ ] Quien lo hizo puede explicarlo sin ayuda
 
 ## Aprender con IA

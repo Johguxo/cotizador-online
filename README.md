@@ -1,6 +1,6 @@
-# Plataforma de Cotizaciones
+# CotizAPP
 
-Plataforma web **multi-empresa** donde un equipo de vendedores atiende las solicitudes de cotización que llegan por correo y genera la cotización en PDF.
+**CotizAPP** es una plataforma web **multi-empresa** donde un equipo de vendedores atiende las solicitudes de cotización que llegan por correo y genera la cotización en PDF.
 
 El objetivo es reducir el tiempo entre que llega un pedido por correo y sale la cotización en PDF, sin que ninguna solicitud se pierda ni quede sin dueño.
 
@@ -54,7 +54,7 @@ Se mantiene del plan anterior: cálculos hechos por el código, numeración corr
 | Avisos | WhatsApp Cloud API (Meta) |
 | Pruebas | pytest (API) · vitest (web) |
 | CI | GitHub Actions: ruff, eslint, pytest, vitest |
-| Despliegue | Railway (web y API) |
+| Despliegue (demo) | API en Railway · web en Vercel · datos en Supabase. Ver [docs/despliegue.md](docs/despliegue.md) |
 
 ## Alcance del MVP
 
@@ -92,14 +92,53 @@ Después de estos 10: conectar el proveedor real de correo, configuración de la
 
 ## Organización del repositorio
 
-Un solo repositorio con dos apps (`apps/api` y `apps/web`), las migraciones de Supabase en su propia carpeta, y las specs y skills versionadas junto al código. La estructura detallada de carpetas se define en COT-01.
+Un solo repositorio con dos apps (`apps/api` y `apps/web`), las migraciones de Supabase en su propia carpeta, y las specs versionadas junto al código. El árbol de carpetas está en [docs/arquitectura.md](docs/arquitectura.md#estructura-de-carpetas).
 
 ## Documentación
 
 - [Arquitectura y modelo de datos](docs/arquitectura.md)
+- [Despliegue, costos y variables de entorno](docs/despliegue.md)
 - [Metodología de trabajo y Spec Driven Development](docs/metodologia.md)
 - [Reglas para asistentes de IA](AGENTS.md)
+- [API](apps/api/README.md) · [Web](apps/web/README.md)
 
 ## Cómo empezar
 
-Pendiente (COT-01). La meta es que un solo comando, `pnpm dev`, levante la web y la API.
+### Requisitos
+
+- [Node.js](https://nodejs.org) (versión LTS) y [pnpm](https://pnpm.io/installation)
+- [Python 3.12](https://www.python.org/downloads/) y [uv](https://docs.astral.sh/uv/getting-started/installation/)
+- Git
+
+### Instalación
+
+```bash
+git clone https://github.com/Johguxo/cotizador-online.git
+cd cotizador-online
+pnpm install
+```
+
+`pnpm install` instala las dependencias de JavaScript de todo el monorepo. Las de Python se instalan solas la primera vez que corres `uv run`.
+
+### Levantar el proyecto
+
+Hoy se necesitan **dos terminales**, porque `pnpm dev` todavía no levanta la API.
+
+**Terminal 1 — web:**
+
+```bash
+pnpm dev
+```
+
+Abre http://localhost:3000.
+
+**Terminal 2 — API:**
+
+```bash
+cd apps/api
+uv run uvicorn main:app --reload
+```
+
+Abre http://localhost:8000/health. Debe responder `{"status": "ok"}`. La documentación interactiva de la API está en http://localhost:8000/docs.
+
+Las variables de entorno y el despliegue están en [docs/despliegue.md](docs/despliegue.md).
