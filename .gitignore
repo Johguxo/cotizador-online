@@ -2,6 +2,12 @@
 .venv/
 venv/
 
+# Node / pnpm / Next.js
+node_modules/
+.next/
+.turbo/
+dist/
+
 # Variables de entorno (contienen contraseñas)
 .env
 

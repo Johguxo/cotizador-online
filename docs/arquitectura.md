@@ -132,4 +132,21 @@ Las tablas se crean por partes, cada una en el ticket que la necesita (COT-02, C
 
 ## Estructura de carpetas
 
-Pendiente (COT-01). En resumen: `apps/api`, `apps/web`, `packages/api-client`, la carpeta de migraciones de Supabase, `specs/` y `.claude/skills/`.
+```
+cotizador-online/
+├── apps/
+│   ├── api/              # FastAPI, gestionado con uv. Por ahora solo GET /health
+│   └── web/               # Next.js 16 (App Router) + Tailwind + shadcn/ui
+├── packages/
+│   └── api-client/        # Tipos generados desde el OpenAPI de apps/api (vacío hasta que haya endpoints de negocio)
+├── supabase/
+│   └── migrations/        # Migraciones SQL vía Supabase CLI (vacío hasta tener credenciales)
+├── specs/                  # spec.md, plan.md, tasks.md de cada feature
+├── docs/                   # esta documentación
+├── pnpm-workspace.yaml      # workspaces: apps/*, packages/*
+├── turbo.json               # tareas dev/build de Turborepo
+├── AGENTS.md
+└── README.md
+```
+
+`.claude/skills/` todavía no existe — se crea cuando haya contenido real que documentar ahí.
