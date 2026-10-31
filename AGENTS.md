@@ -26,7 +26,7 @@ Monorepo con pnpm + Turborepo y uv.
 - **Supabase:** PostgreSQL con RLS, Auth, Storage. Migraciones en SQL con Supabase CLI (no Alembic).
 - **Avisos:** WhatsApp Cloud API (Meta).
 - **CI:** GitHub Actions (ruff, eslint, pytest, vitest).
-- **Despliegue:** Railway (web y API).
+- **Despliegue (demo):** API en Railway, web en Vercel, datos en Supabase. Ver [docs/despliegue.md](docs/despliegue.md).
 
 No agregues librerías nuevas sin explicar por qué hacen falta.
 
@@ -56,9 +56,10 @@ Valores fijos:
 
 ## Git
 
+- El desarrollo se integra en `develop`. Las ramas de ticket salen de `develop` y sus PRs van a `develop`. Solo el líder pasa `develop` a `main`.
 - La rama lleva el id de Linear, por ejemplo `cot-12-tabla-customers`.
 - Primero un PR con la spec; después el PR del código, que enlaza la spec.
 - Commits con prefijo: `feat`, `fix`, `docs`, `refactor`, `test`.
-- **Nunca hagas push a `main`.**
+- **Nunca hagas push a `main` ni a `develop`.**
 
 Más detalle en [docs/metodologia.md](docs/metodologia.md).
