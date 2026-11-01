@@ -1,12 +1,14 @@
 # Arquitectura
 
-La plataforma es un **monorepo con dos apps**: una API en Python (`apps/api`, FastAPI) y una web en Next.js (`apps/web`), ambas desplegadas en **Railway**. La base de datos, el login y los archivos viven en **Supabase**.
+CotizAPP es un **monorepo con dos apps**: una API en Python (`apps/api`, FastAPI) desplegada en **Railway**, y una web en Next.js (`apps/web`) desplegada en **Vercel**. La base de datos, el login y los archivos viven en **Supabase**. Detalle en [despliegue.md](despliegue.md).
 
 ## Idea principal
 
 **Toda la lógica pasa por la API; la web solo usa Supabase para el login.**
 
 ![Arquitectura: el vendedor usa la web, la web llama a la API con REST + JWT, la API usa Supabase y avisa por WhatsApp](img/arquitectura.png)
+
+> La imagen dice que `apps/web` se despliega en Railway. Para la demo se despliega en **Vercel**; el resto del diagrama no cambia.
 
 | Pieza | Qué hace | Con quién habla |
 |---|---|---|
@@ -150,3 +152,5 @@ cotizador-online/
 ```
 
 `.claude/skills/` todavía no existe — se crea cuando haya contenido real que documentar ahí.
+
+`pnpm dev` (Turborepo) solo levanta `apps/web`: `apps/api` no tiene `package.json`, así que Turborepo no la ve. Por ahora la API se levanta aparte (ver [Cómo empezar](../README.md#cómo-empezar)).

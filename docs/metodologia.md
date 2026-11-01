@@ -60,24 +60,38 @@ Las *skills* son instrucciones guardadas en `.claude/skills/` que le dicen a la 
 
 Las skills se crean en COT-01 (las tres primeras) y en los tickets siguientes.
 
+## Ramas: `main`, `develop` y una rama por ticket
+
+| Rama | Para qué | Quién la actualiza |
+|---|---|---|
+| `main` | Versión estable, la que se despliega | Solo el líder, con un PR desde `develop` |
+| `develop` | Integra todo el desarrollo del día a día | PRs de las ramas de ticket |
+| `cot-XX-...` | Un ticket | Quien toma el ticket |
+
+```
+cot-12-tabla-customers ──PR──► develop ──PR (cuando está estable)──► main
+```
+
+¿Por qué así? `develop` permite juntar y probar varios tickets antes de que lleguen a `main`. Así `main` siempre tiene una versión que funciona.
+
+**Nadie hace push directo a `main` ni a `develop`.** Todo entra por un PR revisado.
+
 ## Flujo de un ticket: primero la spec, después el código
 
-**Nadie hace push directo a `main`.** Todo entra por un PR revisado.
-
 1. Toma un ticket del cycle en Linear y muévelo a **In Progress**.
-2. Actualiza `main` y crea tu rama con el nombre que sugiere Linear:
+2. Actualiza `develop` y crea tu rama con el nombre que sugiere Linear:
    ```bash
-   git checkout main
+   git checkout develop
    git pull
    git checkout -b cot-12-tabla-customers
    ```
-3. Ejecuta `/write-spec COT-12`, completa `spec.md` y abre un **PR solo con la spec**.
+3. Ejecuta `/write-spec COT-12`, completa `spec.md` y abre un **PR solo con la spec** hacia `develop`.
 4. El líder revisa y aprueba la spec.
 5. Ejecuta `/plan-feature` para generar `plan.md` y `tasks.md`.
 6. Ejecuta `/implement-task` **una tarea a la vez**: lee el código, pruébalo y haz commit antes de pasar a la siguiente.
-7. Abre el **PR del código** enlazando la spec y llena la plantilla. Antes de pedir revisión, ejecuta `/review-pr`.
-8. Tu compañero revisa primero; después el líder aprueba y hace merge.
-9. El merge a `main` despliega automáticamente en Railway y Linear marca el ticket como **Done**.
+7. Abre el **PR del código** hacia `develop`, enlazando la spec, y llena la plantilla. Antes de pedir revisión, ejecuta `/review-pr`.
+8. Tu compañero revisa primero; después el líder aprueba y hace merge a `develop`. Linear marca el ticket como **Done**.
+9. Cuando `develop` está estable, el líder abre un PR de `develop` a `main`. El merge a `main` despliega automáticamente (API en Railway, web en Vercel).
 
 ## Mensajes de commit
 
@@ -100,7 +114,7 @@ Un ticket está terminado solo cuando:
 - [ ] El CI está en verde (lint y pruebas)
 - [ ] El PR tiene descripción y explicación del código
 - [ ] Fue revisado y aprobado
-- [ ] Está en `main` y desplegado en Railway
+- [ ] Está mergeado en `develop`
 - [ ] Quien lo hizo puede explicarlo sin ayuda
 
 ## Aprender con IA

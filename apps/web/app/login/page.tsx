@@ -1,3 +1,7 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,6 +14,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function LoginPage() {
+  const router = useRouter();
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    // Todavía no hay autenticación real: cualquier envío te lleva al dashboard.
+    router.push("/dashboard");
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/40 p-4">
       <Card className="w-full max-w-sm">
@@ -18,7 +30,7 @@ export default function LoginPage() {
           <CardDescription>Ingresa a tu cuenta para continuar</CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-2">
               <Label htmlFor="email">Correo</Label>
               <Input id="email" type="email" placeholder="tu@empresa.com" />
