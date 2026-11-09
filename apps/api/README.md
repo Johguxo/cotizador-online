@@ -9,10 +9,14 @@ API en **FastAPI** con toda la lógica de negocio: solicitudes, asignación, cá
 
 ## Levantar en local
 
+Desde la raíz del repo, `pnpm dev` levanta esto junto con la web. Para levantar solo la API:
+
 ```bash
 cd apps/api
-uv run uvicorn main:app --reload --port 8010
+uv run python -m uvicorn main:app --reload --port 8010
 ```
+
+> En Windows, `uv run uvicorn ...` (sin `python -m`) puede fallar con *"An Application Control policy has blocked this file"* si Smart App Control u otra política de seguridad bloquea el ejecutable `uvicorn.exe`. `python -m uvicorn` evita el problema porque lo corre `python.exe` en vez de ese stub.
 
 - `uv run` crea el entorno virtual e instala las dependencias de `pyproject.toml` la primera vez.
 - `--reload` reinicia el servidor cada vez que guardas un archivo.
