@@ -108,7 +108,10 @@ Un solo repositorio con dos apps (`apps/api` y `apps/web`), las migraciones de S
 
 - [Node.js](https://nodejs.org) (versión LTS) y [pnpm](https://pnpm.io/installation)
 - [Python 3.12](https://www.python.org/downloads/) y [uv](https://docs.astral.sh/uv/getting-started/installation/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (para levantar Supabase en local)
 - Git
+
+No hace falta instalar la Supabase CLI aparte: se usa con `npx supabase <comando>`.
 
 ### Instalación
 
@@ -120,11 +123,22 @@ pnpm install
 
 `pnpm install` instala las dependencias de JavaScript de todo el monorepo. Las de Python se instalan solas la primera vez que corres `uv run`.
 
-Copia las variables de entorno de la web (le dicen dónde está la API):
+Copia las variables de entorno de la web y de la API:
 
 ```bash
 cp apps/web/.env.example apps/web/.env.local
+cp apps/api/.env.example apps/api/.env
 ```
+
+Pide las credenciales reales de Supabase a tu líder (nunca se suben a git) y complétalas en ambos archivos. El detalle de cada variable está en [docs/despliegue.md](docs/despliegue.md).
+
+### Supabase en local
+
+```bash
+npx supabase start
+```
+
+La primera vez descarga las imágenes de Docker — tarda unos minutos. Al terminar muestra la URL del Studio local (`http://localhost:54323`) y las llaves de ese entorno local (son fijas, no son secretas). `npx supabase stop` lo apaga.
 
 ### Levantar el proyecto
 
