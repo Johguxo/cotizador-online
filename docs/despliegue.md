@@ -27,6 +27,7 @@ Vercel (apps/web) ──REST + JWT──► Railway (apps/api) ──► Supabas
 - La web y la API tienen **dominios distintos**. Por eso la API debe permitir el dominio de Vercel en su configuración de **CORS** (la regla del navegador que bloquea llamadas a otro dominio si este no las autoriza).
 - **Región:** crear el proyecto de Supabase y el servicio de Railway en la **misma región** (por ejemplo, us-east). Si están lejos, cada consulta de la API a la base tarda más.
 - **Conexión de la API a la base:** usar la cadena de conexión del **pooler** de Supabase (*Session pooler*), no la conexión directa. La conexión directa de Supabase es solo IPv6 y puede fallar desde Railway.
+- **Bucket de Storage:** `files`, privado (`public: false`). Guarda tanto los adjuntos de correos como los PDFs de cotizaciones emitidas. Al ser privado, la API genera URLs firmadas con `SUPABASE_SECRET_KEY` para que el navegador pueda descargarlos.
 
 ## Configuración en cada servicio
 
@@ -50,11 +51,15 @@ Variables previstas (cada una se confirma en el ticket que la empiece a usar):
 |---|---|---|
 | `DATABASE_URL` | API (Railway) | Conexión a Postgres de Supabase (cadena del pooler) |
 | `SUPABASE_URL` | API (Railway) | Dirección del proyecto de Supabase |
-| `SUPABASE_SERVICE_ROLE_KEY` | API (Railway) | Llave del servidor para Storage. Es secreta: nunca va en la web |
+| `SUPABASE_PUBLISHABLE_KEY` | API (Railway) | Llave pública del proyecto |
+| `SUPABASE_SECRET_KEY` | API (Railway) | Llave del servidor para Storage y para saltarse RLS. Es secreta: nunca va en la web |
+| `SUPABASE_JWKS_URL` | API (Railway) | Para validar JWT de Supabase Auth localmente, sin llamar a su API en cada request |
 | `CORS_ORIGINS` | API (Railway) | Dominios que pueden llamar a la API (`http://localhost:3000` y el de Vercel) |
 | `NEXT_PUBLIC_API_URL` | Web (Vercel) | Dirección de la API en Railway |
 | `NEXT_PUBLIC_SUPABASE_URL` | Web (Vercel) | Dirección del proyecto de Supabase, para el login |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Web (Vercel) | Llave pública de Supabase, para el login |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Web (Vercel) | Llave pública de Supabase, para el login |
+
+Supabase renombró las llaves clásicas (`anon`/`service_role`, con formato JWT) a `publishable`/`secret` (prefijos `sb_publishable_`/`sb_secret_`). Este proyecto ya usa el formato nuevo.
 
 Las variables que empiezan con `NEXT_PUBLIC_` quedan visibles en el navegador. Nunca pongas una llave secreta con ese prefijo.
 
